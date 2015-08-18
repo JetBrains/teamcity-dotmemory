@@ -1,6 +1,4 @@
- TeamCity dotMemoryUnit plugin
-
- This is an empty project to develop TeamCity plugin.
+ TeamCity dotMemory Unit plugin
 
  1. Implement
  This project contains 3 modules: 'dotMemoryUnit-server', 'dotMemoryUnit-agent' and 'dotMemoryUnit-common'. They will contain code for server and agent parts of your plugin and a common part, available for both (agent and server). When implementing components for server and agent parts, do not forget to update spring context files under 'main/resources/META-INF'. Otherwise your compoment may be not loaded. See TeamCity documentation for details on plugin development.
