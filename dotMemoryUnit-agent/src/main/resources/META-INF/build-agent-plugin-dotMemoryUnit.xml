@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="constructor" >
+
+       <bean class="jetbrains.buildServer.dotMemoryUnit.agent.DotMemoryUnitOutputParser" id="dotMemoryUnitOutputParser"/>
+       <bean class="jetbrains.buildServer.dotMemoryUnit.agent.DotMemoryUnitPublisher" id="dotMemoryUnitPublisher">
+              <constructor-arg ref="dotMemoryUnitOutputParser"/>
+              <constructor-arg ref="afterBuildPublisher"/>
+       </bean>
+       <bean class="jetbrains.buildServer.dotMemoryUnit.agent.DotMemoryUnitProjectGenerator" id="dotMemoryUnitProjectGenerator"/>
+       <bean class="jetbrains.buildServer.dotMemoryUnit.agent.DotMemoryUnitSetupBuilder" id="dotMemoryUnitSetupBuilder">
+              <constructor-arg ref="dotMemoryUnitProjectGenerator"/>
+              <constructor-arg ref="beforeBuildPublisher"/>
+              <constructor-arg ref="dotMemoryUnitPublisher"/>
+       </bean>
+
+       <bean class="jetbrains.buildServer.dotNet.buildRunner.agent.BuildCommandLineProcessorAdapterImpl" id="dotMemoryUnitBuildCommandLineProcessor">
+              <constructor-arg ref="dotMemoryUnitSetupBuilder"/>
+       </bean>
+</beans>
