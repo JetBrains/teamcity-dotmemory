@@ -1,5 +1,7 @@
 ﻿namespace testproj
 {
+    using System;
+
     using JetBrains.dotMemoryUnit;
 
     using NUnit.Framework;
@@ -13,7 +15,11 @@
             dotMemory.Check(
                 memory =>
                 {
-                    Assert.AreEqual(10, memory.ObjectsCount);
+                    var str1 = "1";
+                    var str2 = "2";
+                    var str3 = "3";
+                    Assert.LessOrEqual(2, memory.ObjectsCount);
+                    Console.WriteLine(str1 + str2 + str3);
                 });
         }
     }
