@@ -11,7 +11,7 @@ This plugin is adding advanced options for .Net related build runners in the Tea
 
 ## Install ##
 
-To install the plugin, put [zip archive](https://teamcity.jetbrains.com/repository/download/TeamCityPluginsByJetBrains_DotMemoryUnit_Build/551932:id/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server.
+To install the plugin, put [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master/artifacts/content/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server.
 
 ## Implemention ##
 
