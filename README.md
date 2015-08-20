@@ -8,7 +8,7 @@ This plugin is adding advanced options for .Net related build runners in the Tea
 - add step to restore NuGet packages, for example `NuGet.exe restore testproj\packages.config -PackagesDirectory testproj\packages`
 - add step to build project
 - add step to run memory tests and use advanced option: turn on "Use dotMemory Unit", specify path to dotMemory Unit profiler, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`
-- 
+
 ## Install ##
 
 To install the plugin, put [zip archive](https://teamcity.jetbrains.com/repository/download/TeamCityPluginsByJetBrains_DotMemoryUnit_Build/551932:id/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server.
