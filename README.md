@@ -19,7 +19,7 @@ This project contains 3 modules: 'dotMemoryUnit-server', 'dotMemoryUnit-agent' a
 
 ## Build ##
 
-Issue 'mvn package' command from the root project to build your plugin. Resulting package 'dotMemoryUnit.zip' will be placed in 'target' directory. The build is configured on the [JetBrains TeamCity build server](https://teamcity.jetbrains.com/project.html?projectId=TeamCityPluginsByJetBrains_DotMemoryUnit).
+Issue 'mvn package' command from the root project to build your plugin. Resulting package 'dotMemoryUnit.zip' will be placed in 'target' directory. The build is configured on the [JetBrains TeamCity build server](https://teamcity.jetbrains.com/viewLog.html?buildTypeId=TeamCityPluginsByJetBrains_DotMemoryUnit_Build&buildId=lastPinned&buildBranch=%3Cdefault%3E).
 
 ## License ##
 
