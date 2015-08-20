@@ -11,7 +11,7 @@ This plugin provides ability to run build step under the [JetBrains dotMemory Un
 
 ## Install ##
 
-To install the plugin, put [zip archive](http://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master/artifacts/content/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server. See the [instruction](README.DOWNLOAD.md) to download JetBrains dotMemory Unit on the TeamCity agent.
+To install the plugin, put [zip archive](http://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:dorMemoryUnit-1.0.6/artifacts/content/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server. See the [instruction](README.DOWNLOAD.md) to download JetBrains dotMemory Unit on the TeamCity agent.
 
 ## Implemention ##
 
