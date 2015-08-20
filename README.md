@@ -1,9 +1,9 @@
 # TeamCity dotMemory Unit plugin #
 
-This plugin is adding advanced options for .Net related build runners in the TeamCity which allow to run build step under the dotMemory Unit profiler. The common scenario could has following steps:
+This plugin is adding advanced options for .Net related build runners in the TeamCity which allow to run build step under the [dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/). The common scenario could has following steps:
 - create solution with test project
 - add [NuGet package for the dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/)
-- implement tests using [dotMemory Unit framework](https://www.jetbrains.com/dotmemory/unit/)
+- implement tests using [dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/)
 - create build project and configuration using the [TeamCity build server](https://www.jetbrains.com/teamcity/)
 - add build step to restore NuGet packages, for example `NuGet.exe restore testproj\packages.config -PackagesDirectory testproj\packages`
 - add build step to build project
@@ -28,3 +28,10 @@ TeamCity dotMemory Unit plugin is under the [Apache License](https://github.com/
 ## Contributors ##
 
 - [Nikolay Pianikov](https://github.com/NikolayPianikov)
+
+## Resources ##
+
+- [dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/)
+- [NuGet package for the dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/)
+- [dotMemory Unit - Get Started](https://www.jetbrains.com/dotmemory/unit/help/Get_Started.html)
+- [Unit Testing and Memory Profiling](http://blog.jetbrains.com/dotnet/2015/03/04/unit-testing-and-memory-profiling-can-they-be-combined/)
