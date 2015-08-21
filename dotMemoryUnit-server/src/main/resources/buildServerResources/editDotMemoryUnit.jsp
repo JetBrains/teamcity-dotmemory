@@ -43,7 +43,7 @@
         <props:textProperty name="${bean.pathKey}" className="longField"/>
       </div>
       <span class="error" id="error_${bean.pathKey}"></span>
-      <span class="smallNote">See the <a href='https://github.com/JetBrains/teamcity-dotmemory/blob/master/README.DOWNLOAD.md' target='JetBrains dotMemory Unit downloading'>instruction</a> to download</span>
+      <span class="smallNote">See the <a href='https://github.com/JetBrains/teamcity-dotmemory/blob/master/README.md#agent_deployment'  target='JetBrains dotMemory Unit downloading'>instruction</a> to download</span>
     </td>
   </tr>
 
