@@ -1,4 +1,4 @@
-# TeamCity dotMemory Unit plugin #
+# JetBrains dotMemory Unit plugin for TeamCity #
 
 This plugin is adding advanced options for .Net related build runners in the TeamCity which allow to run build step under the [dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/). The common scenario could has following steps:
 - create solution with test project
@@ -11,7 +11,7 @@ This plugin is adding advanced options for .Net related build runners in the Tea
 
 ## Install ##
 
-To install the plugin, put [zip archive](http://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master/artifacts/content/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server.
+To install the plugin, put [zip archive](http://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master/artifacts/content/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server. See the [instruction](README.DOWNLOAD.md) to download JetBrains dotMemory Unit on  an TeamCity agent.
 
 ## Implemention ##
 
