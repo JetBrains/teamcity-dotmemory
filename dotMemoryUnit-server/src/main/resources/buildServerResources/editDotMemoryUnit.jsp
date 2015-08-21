@@ -6,15 +6,37 @@
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 <jsp:useBean id="bean" class="jetbrains.buildServer.dotMemoryUnit.server.DotMemoryUnitBean"/>
 
+<script type="text/javascript">
+  BS.DotMemoryUnit = {
+    updatePathVisibility: function() {
+      var useDotMemoryUnitElement = document.getElementById("${bean.useDotMemoryUnitKey}");
+      var useDotMemoryUnit = useDotMemoryUnitElement.checked;
+
+      if (useDotMemoryUnit == true) {
+        $j('#dotMemoryUnitPathContainer').removeClass("hidden");
+        $j('#dotMemoryUnitWorkspacesPathContainer').removeClass("hidden");
+      }
+      else {
+        $j('#dotMemoryUnitPathContainer').addClass("hidden");
+        $j('#dotMemoryUnitWorkspacesPathContainer').addClass("hidden");
+      }
+
+      BS.VisibilityHandlers.updateVisibility($('dotMemoryUnitPathContainer'));
+      BS.VisibilityHandlers.updateVisibility($('dotMemoryUnitWorkspacesPathContainer'));
+    }
+  }
+</script>
+
+
 <l:settingsGroup title="<a href='http://www.jetbrains.com/dotmemory/unit/' target='JetBrains dotMemory Unit'>JetBrains dotMemory Unit</a>">
   <tr>
     <th><label for="${bean.useDotMemoryUnitKey}">Run build step under JetBrains dotMemory Unit:</label></th>
-    <td><props:checkboxProperty name="${bean.useDotMemoryUnitKey}"/>
+    <td><props:checkboxProperty name="${bean.useDotMemoryUnitKey}" onclick="BS.DotMemoryUnit.updatePathVisibility()"/>
       <span class="error" id="error_${bean.useDotMemoryUnitKey}"></span>
     </td>
   </tr>
 
-  <tr>
+  <tr id="dotMemoryUnitPathContainer" class="hidden">
     <th><label for="${bean.pathKey}">Path to dotMemoryUnit.exe: <l:star/></label></th>
     <td>
       <div class="completionIconWrapper">
@@ -25,7 +47,7 @@
     </td>
   </tr>
 
-  <tr>
+  <tr id="dotMemoryUnitWorkspacesPathContainer" class="hidden">
     <th><label for="${bean.workspacesPathKey}">Path for storing workspaces: <l:star/></label></th>
     <td>
       <div class="completionIconWrapper">
@@ -37,3 +59,7 @@
   </tr>
 
 </l:settingsGroup>
+
+<script type="text/javascript">
+  BS.DotMemoryUnit.updatePathVisibility();
+</script>
