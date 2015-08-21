@@ -1,4 +1,4 @@
-## Downloading JetBrains dotMemory Unit tools ##
+## The deployment of the JetBrains dotMemory Unit profiling command-line tool on the TeamCity agent ##
 
 JetBrains dotMemory Unit is a unit testing framework which allows you to write tests that check your code for all kinds of memory issues. To run memory tests using JetBrains dotMemory Unit testing framework on the TeamCity you should have JetBrains dotMemory Unit profiling command-line tool on the each TeamCity agent where you are going to run them. There are two alternative ways to deploy the command-line tool on the TeamCity agent:
 
