@@ -10,3 +10,7 @@
 <div class="parameter">
   Path to dotMemoryUnit.exe: <props:displayValue name="${bean.pathKey}" emptyValue="<empty>"/>
 </div>
+
+<div class="parameter">
+  Path for storing workspaces: <props:displayValue name="${bean.workspacesPathKey}" emptyValue="<empty>"/>
+</div>
