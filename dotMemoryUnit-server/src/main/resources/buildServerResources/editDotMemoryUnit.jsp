@@ -15,13 +15,24 @@
   </tr>
 
   <tr>
-    <th><label for="${bean.dotMemoryUnitPathKey}">Path to dotMemoryUnit.exe: <l:star/></label></th>
+    <th><label for="${bean.pathKey}">Path to dotMemoryUnit.exe: <l:star/></label></th>
     <td>
       <div class="completionIconWrapper">
-        <props:textProperty name="${bean.dotMemoryUnitPathKey}" className="longField"/>
+        <props:textProperty name="${bean.pathKey}" className="longField"/>
       </div>
-      <span class="error" id="error_${bean.dotMemoryUnitPathKey}"></span>
+      <span class="error" id="error_${bean.pathKey}"></span>
       <span class="smallNote">See the <a href='https://github.com/JetBrains/teamcity-dotmemory/blob/master/README.DOWNLOAD.md' target='JetBrains dotMemory Unit downloading'>instruction</a> to download</span>
+    </td>
+  </tr>
+
+  <tr>
+    <th><label for="${bean.workspacesPathKey}">Path for storing workspaces: <l:star/></label></th>
+    <td>
+      <div class="completionIconWrapper">
+        <props:textProperty name="${bean.workspacesPathKey}" className="longField"/>
+      </div>
+      <span class="error" id="error_${bean.workspacesPathKey}"></span>
+      <span class="smallNote">Specify path to directory which will be used by the JetBrains dotMemory Unit for storing workspaces</span>
     </td>
   </tr>
 

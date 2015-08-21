@@ -17,7 +17,8 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.web.servlet.ModelAndView;
 
 public class DotMemoryUnitEditExtension extends RunTypeExtension implements PositionAware {
-  private static final String PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path to dotMemory Unit must be specified.";
+  private static final String DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path to dotMemoryUnit.exe must be specified.";
+  private static final String WORKSPACES_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path for storing workspaces must be specified.";
   private static final List<String> ourRunTypes = Arrays.asList("MSBuild", "NAnt", "NUnit", "jetbrains.mspec", "jetbrains.dotNetGenericRunner", "jetbrains.xunit", "VisualStudioTest", "MSTest", "VSTest");
   private final String myViewUrl;
   private final String myEditUrl;
@@ -29,11 +30,13 @@ public class DotMemoryUnitEditExtension extends RunTypeExtension implements Posi
     myEditUrl = registerView(descriptor, wcm, "dotMemoryUnitEdit.html", "editDotMemoryUnit.jsp");
   }
 
+  @Override
   @NotNull
   public String getOrderId() {
     return "dotMemoryUnit";
   }
 
+  @Override
   @NotNull
   public PositionConstraint getConstraint() {
     return PositionConstraint.last();
@@ -48,12 +51,17 @@ public class DotMemoryUnitEditExtension extends RunTypeExtension implements Posi
   @Override
   public PropertiesProcessor getRunnerPropertiesProcessor() {
     return new PropertiesProcessor() {
+      @Override
       public Collection<InvalidProperty> process(final Map<String, String> properties) {
         final ArrayList<InvalidProperty> result = new ArrayList<InvalidProperty>();
 
         final boolean useDotMemoryUnit = StringUtil.isTrue(properties.get(DotMemoryUnitBean.Shared.getUseDotMemoryUnitKey()));
-        if(useDotMemoryUnit && StringUtil.isEmptyOrSpaces(properties.get(DotMemoryUnitBean.Shared.getDotMemoryUnitPathKey()))) {
-          result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getUseDotMemoryUnitKey(), PATH_NOT_SPECIFIED_ERROR_MESSAGE));
+        if(useDotMemoryUnit && StringUtil.isEmptyOrSpaces(properties.get(DotMemoryUnitBean.Shared.getPathKey()))) {
+          result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getPathKey(), DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE));
+        }
+
+        if(useDotMemoryUnit && StringUtil.isEmptyOrSpaces(properties.get(DotMemoryUnitBean.Shared.getWorkspacesPathKey()))) {
+          result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getWorkspacesPathKey(), WORKSPACES_PATH_NOT_SPECIFIED_ERROR_MESSAGE));
         }
 
         return result;

@@ -37,29 +37,25 @@ public class DotMemoryUnitSetupBuilder implements CommandLineSetupBuilder {
     myAssertions = assertions;
   }
 
+  @Override
   @NotNull
   public Iterable<CommandLineSetup> build(@NotNull final CommandLineSetup baseSetup) {
     if(myAssertions.contains(RunnerAssertions.Assertion.PROFILING_IS_NOT_ALLOWED)) {
       return Collections.singleton(baseSetup);
     }
 
-    String dotMemoryUnitTool = myParametersService.tryGetRunnerParameter(Constants.USE_VAR);
+    final String dotMemoryUnitTool = myParametersService.tryGetRunnerParameter(Constants.USE_VAR);
     if (StringUtil.isEmptyOrSpaces(dotMemoryUnitTool) || !Boolean.parseBoolean(dotMemoryUnitTool)) {
       return Collections.singleton(baseSetup);
     }
 
-    String dotMemoryUnitPath = myParametersService.tryGetRunnerParameter(Constants.PATH_VAR);
-    if(dotMemoryUnitPath == null) {
-      dotMemoryUnitPath = "";
-    }
-
-    File toolPath = new File(dotMemoryUnitPath, DOT_MEMORY_UNIT_EXE_NAME);
+    final File toolPath = new File(myParametersService.getRunnerParameter(Constants.PATH_VAR), DOT_MEMORY_UNIT_EXE_NAME);
     myFileService.validatePath(toolPath);
 
     List<CommandLineResource> resources = new ArrayList<CommandLineResource>(baseSetup.getResources());
     final File projectFile = myFileService.getTempFileName(DOT_MEMORY_UNIT_PROJECT_EXT);
     final File outputFile = myFileService.getTempFileName(DOT_MEMORY_UNIT_OUTPUT_EXT);
-    final File workspaceDirectory = myFileService.getTempDirectory();
+    final File workspaceDirectory = new File(myParametersService.getRunnerParameter(Constants.WORKSPACES_PATH_VAR));
     final String projectFileContent = myDotMemoryUnitProjectGenerator.create(new DotMemoryUnitContext(baseSetup, workspaceDirectory, outputFile));
     resources.add(new CommandLineFile(myBeforeBuildPublisher, projectFile, projectFileContent));
     resources.add(new CommandLineArtifact(myDotMemoryUnitPublisher, outputFile));

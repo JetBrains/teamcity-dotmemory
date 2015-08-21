@@ -12,7 +12,12 @@ public class DotMemoryUnitBean {
   }
 
   @NotNull
-  public String getDotMemoryUnitPathKey() {
+  public String getPathKey() {
     return Constants.PATH_VAR;
+  }
+
+  @NotNull
+  public String getWorkspacesPathKey() {
+    return Constants.WORKSPACES_PATH_VAR;
   }
 }

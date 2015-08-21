@@ -4,9 +4,9 @@
 <jsp:useBean id="bean" class="jetbrains.buildServer.dotMemoryUnit.server.DotMemoryUnitBean"/>
 
 <div class="parameter">
-  Use dotMemory Unit: <props:displayValue name="${bean.useDotMemoryUnitKey}" emptyValue="false"/>
+  Run build step under JetBrains dotMemory Unit: <props:displayValue name="${bean.useDotMemoryUnitKey}" emptyValue="false"/>
 </div>
 
 <div class="parameter">
-  Path to dotMemory Unit: <props:displayValue name="${bean.dotMemoryUnitPathKey}" emptyValue="<empty>"/>
+  Path to dotMemoryUnit.exe: <props:displayValue name="${bean.pathKey}" emptyValue="<empty>"/>
 </div>

@@ -52,20 +52,20 @@ public class DotMemoryUnitSetupBuilderTest {
       oneOf(myAssertions).contains(RunnerAssertions.Assertion.PROFILING_IS_NOT_ALLOWED);
       will(returnValue(false));
       
-      oneOf(myRunnerParametersService).tryGetRunnerParameter(Constants.PATH_VAR);
-      will(returnValue(dotMemoryUnitFile.getParent()));
-
       oneOf(myRunnerParametersService).tryGetRunnerParameter(Constants.USE_VAR);
       will(returnValue("True"));
+
+      oneOf(myRunnerParametersService).getRunnerParameter(Constants.PATH_VAR);
+      will(returnValue(dotMemoryUnitFile.getParent()));
+
+      oneOf(myRunnerParametersService).getRunnerParameter(Constants.WORKSPACES_PATH_VAR);
+      will(returnValue(workspaceDir.getPath()));
 
       oneOf(myFileService).getTempFileName(DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_PROJECT_EXT);
       will(returnValue(projectFile));
 
       oneOf(myFileService).getTempFileName(DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_OUTPUT_EXT);
       will(returnValue(outputFile));
-
-      oneOf(myFileService).getTempDirectory();
-      will(returnValue(workspaceDir));
 
       oneOf(myDotMemoryUnitProjectGenerator).create(new DotMemoryUnitContext(baseSetup, workspaceDir, outputFile));
       will(returnValue("project content"));

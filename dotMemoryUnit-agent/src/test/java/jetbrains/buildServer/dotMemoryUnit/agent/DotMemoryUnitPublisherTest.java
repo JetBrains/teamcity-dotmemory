@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import jetbrains.buildServer.dotNet.buildRunner.agent.CommandLineExecutionContext;
-import jetbrains.buildServer.dotNet.buildRunner.agent.FileService;
-import jetbrains.buildServer.dotNet.buildRunner.agent.ResourcePublisher;
-import jetbrains.buildServer.dotNet.buildRunner.agent.TextParser;
+import jetbrains.buildServer.dotNet.buildRunner.agent.*;
+import jetbrains.buildServer.messages.serviceMessages.Message;
 import org.jetbrains.annotations.NotNull;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -19,6 +17,7 @@ public class DotMemoryUnitPublisherTest {
   private TextParser<DotMemoryUnitOutput> myOutputParser;
   private ResourcePublisher myAfterBuildPublisher;
   private FileService myFileService;
+  private LoggerService myLoggerService;
 
   @BeforeMethod
   public void setUp()
@@ -28,6 +27,7 @@ public class DotMemoryUnitPublisherTest {
     myOutputParser = (TextParser<DotMemoryUnitOutput>)myCtx.mock(TextParser.class);
     myAfterBuildPublisher = myCtx.mock(ResourcePublisher.class);
     myFileService = myCtx.mock(FileService.class);
+    myLoggerService = myCtx.mock(LoggerService.class);
   }
 
   @Test
@@ -47,9 +47,7 @@ public class DotMemoryUnitPublisherTest {
 
       oneOf(myAfterBuildPublisher).publishAfterBuildArtifactFile(executionContext, outputFile);
 
-      oneOf(myAfterBuildPublisher).publishAfterBuildArtifactFile(executionContext, workspace1File);
-
-      oneOf(myAfterBuildPublisher).publishAfterBuildArtifactFile(executionContext, workspace2File);
+      exactly(2).of(myLoggerService).onMessage(with(any(Message.class)));
     }});
 
     final ResourcePublisher instance = createInstance();
@@ -64,6 +62,6 @@ public class DotMemoryUnitPublisherTest {
   @NotNull
   private DotMemoryUnitPublisher createInstance()
   {
-    return new DotMemoryUnitPublisher(myOutputParser, myAfterBuildPublisher, myFileService);
+    return new DotMemoryUnitPublisher(myOutputParser, myAfterBuildPublisher, myFileService, myLoggerService);
   }
 }
