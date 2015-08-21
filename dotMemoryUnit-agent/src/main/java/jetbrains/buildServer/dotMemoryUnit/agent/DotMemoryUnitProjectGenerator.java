@@ -45,6 +45,7 @@ public class DotMemoryUnitProjectGenerator implements ResourceGenerator<DotMemor
     myFileService = fileService;
   }
 
+  @Override
   @NotNull
   public String create(@NotNull final DotMemoryUnitContext ctx) {
     final Document doc = myDocumentManager.createDocument();
@@ -55,7 +56,7 @@ public class DotMemoryUnitProjectGenerator implements ResourceGenerator<DotMemor
     rootElement.appendChild(createSimpleElement(doc, INHERIT_CONSOLE_ELEMENT, INHERIT_CONSOLE_ARG_VAL));
     rootElement.appendChild(createSimpleElement(doc, RETURN_TARGET_EXIT_CODE_ELEMENT, ""));
     rootElement.appendChild(createSimpleElement(doc, TEMP_DIR_ELEMENT, myFileService.getTempDirectory().getPath()));
-    rootElement.appendChild(createSimpleElement(doc, OVERRIDE_WORKSPACE_DIR_ELEMENT, ctx.getWorkspaceDirectory().getPath()));
+    rootElement.appendChild(createSimpleElement(doc, OVERRIDE_WORKSPACE_DIR_ELEMENT, ctx.getSnapshotDirectory().getPath()));
     rootElement.appendChild(createSimpleElement(doc, OUTPUT_FILE_PATH_ELEMENT, ctx.getOutputFile().getPath()));
     rootElement.appendChild(createSimpleElement(doc, DMU_MODE_ELEMENT, DMU_MODE_TEAM_CITY));
     doc.appendChild(rootElement);

@@ -17,7 +17,7 @@ public class DotMemoryUnitBean {
   }
 
   @NotNull
-  public String getWorkspacesPathKey() {
-    return Constants.WORKSPACES_PATH_VAR;
+  public String getSnapshotsPathKey() {
+    return Constants.SNAPSHOTS_PATH_VAR;
   }
 }

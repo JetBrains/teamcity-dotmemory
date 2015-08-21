@@ -1,27 +1,34 @@
 package jetbrains.buildServer.dotMemoryUnit.agent;
 
+import com.intellij.openapi.util.text.StringUtil;
 import java.io.File;
 import java.io.IOException;
+import jetbrains.buildServer.dotMemoryUnit.Constants;
 import jetbrains.buildServer.dotNet.buildRunner.agent.*;
 import jetbrains.buildServer.messages.serviceMessages.Message;
+import jetbrains.buildServer.messages.serviceMessages.PublishArtifacts;
 import org.jetbrains.annotations.NotNull;
 
 public class DotMemoryUnitPublisher implements ResourcePublisher {
-  private static final String OUTPUT_FILE_NOT_FOUND_ERROR_MESSAGE = "Dot Memory Unit output file \"%s\" was not found";
+  static final String DEFAULT_SNAPSHOTS_DIRECTORY_NAME = "dotMemory";
+
   private final TextParser<DotMemoryUnitOutput> myOutputParser;
   private final FileService myFileService;
   private final LoggerService myLoggerService;
+  private final RunnerParametersService myParametersService;
   private final ResourcePublisher myAfterBuildPublisher;
 
   public DotMemoryUnitPublisher(
     @NotNull final TextParser<DotMemoryUnitOutput> outputParser,
     @NotNull final ResourcePublisher afterBuildPublisher,
     @NotNull final FileService fileService,
-    @NotNull final LoggerService loggerService) {
+    @NotNull final LoggerService loggerService,
+    @NotNull final RunnerParametersService parametersService) {
     myOutputParser = outputParser;
     myAfterBuildPublisher = afterBuildPublisher;
     myFileService = fileService;
     myLoggerService = loggerService;
+    myParametersService = parametersService;
   }
 
   @Override
@@ -32,15 +39,24 @@ public class DotMemoryUnitPublisher implements ResourcePublisher {
   public void publishAfterBuildArtifactFile(@NotNull final CommandLineExecutionContext executionContext, @NotNull final File file) {
     myAfterBuildPublisher.publishAfterBuildArtifactFile(executionContext, file);
 
+    final String snapshotsDirectoryName = myParametersService.tryGetRunnerParameter(Constants.SNAPSHOTS_PATH_VAR);
+    File snapshotsTargetDirectory;
+    if(!StringUtil.isEmptyOrSpaces(snapshotsDirectoryName)) {
+      snapshotsTargetDirectory = new File(snapshotsDirectoryName);
+    } else {
+      snapshotsTargetDirectory = new File(DEFAULT_SNAPSHOTS_DIRECTORY_NAME);
+    }
+
     try {
       final String outputText = myFileService.readAllTextFile(file);
       final DotMemoryUnitOutput output = myOutputParser.parse(outputText);
       for(File workspaceFile : output.getWorkspaces()) {
-        myLoggerService.onMessage(new Message(String.format("The workspace %s was created by the JetBrains dotMemory unit", workspaceFile.toURI().toURL()), "NORMAL", ""));
+        final String artifactPath = String.format("%s => %s", workspaceFile.getPath(), snapshotsTargetDirectory.getPath());
+        myLoggerService.onMessage(new PublishArtifacts(artifactPath));
       }
 
     } catch (IOException e) {
-      throw new BuildException(String.format(OUTPUT_FILE_NOT_FOUND_ERROR_MESSAGE, file.getPath()));
+      throw new BuildException(e.getMessage());
     }
   }
 }

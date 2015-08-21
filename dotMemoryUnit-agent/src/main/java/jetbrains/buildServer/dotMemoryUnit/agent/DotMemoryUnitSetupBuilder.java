@@ -55,8 +55,8 @@ public class DotMemoryUnitSetupBuilder implements CommandLineSetupBuilder {
     List<CommandLineResource> resources = new ArrayList<CommandLineResource>(baseSetup.getResources());
     final File projectFile = myFileService.getTempFileName(DOT_MEMORY_UNIT_PROJECT_EXT);
     final File outputFile = myFileService.getTempFileName(DOT_MEMORY_UNIT_OUTPUT_EXT);
-    final File workspaceDirectory = new File(myParametersService.getRunnerParameter(Constants.WORKSPACES_PATH_VAR));
-    final String projectFileContent = myDotMemoryUnitProjectGenerator.create(new DotMemoryUnitContext(baseSetup, workspaceDirectory, outputFile));
+    final File snapshotsDirectory = myFileService.getTempDirectory();
+    final String projectFileContent = myDotMemoryUnitProjectGenerator.create(new DotMemoryUnitContext(baseSetup, snapshotsDirectory, outputFile));
     resources.add(new CommandLineFile(myBeforeBuildPublisher, projectFile, projectFileContent));
     resources.add(new CommandLineArtifact(myDotMemoryUnitPublisher, outputFile));
     return Collections.singleton(new CommandLineSetup(toolPath.getPath(), Collections.singletonList(new CommandLineArgument(projectFile.getPath(), CommandLineArgument.Type.PARAMETER)), resources));

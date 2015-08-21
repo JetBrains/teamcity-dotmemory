@@ -12,5 +12,5 @@
 </div>
 
 <div class="parameter">
-  Path for storing workspaces: <props:displayValue name="${bean.workspacesPathKey}" emptyValue="<empty>"/>
+  Path for storing workspaces: <props:displayValue name="${bean.snapshotsPathKey}" emptyValue="<empty>"/>
 </div>

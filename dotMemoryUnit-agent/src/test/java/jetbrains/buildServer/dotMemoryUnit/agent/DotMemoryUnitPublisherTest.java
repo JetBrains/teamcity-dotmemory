@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import jetbrains.buildServer.dotMemoryUnit.Constants;
 import jetbrains.buildServer.dotNet.buildRunner.agent.*;
 import jetbrains.buildServer.messages.serviceMessages.Message;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +19,7 @@ public class DotMemoryUnitPublisherTest {
   private ResourcePublisher myAfterBuildPublisher;
   private FileService myFileService;
   private LoggerService myLoggerService;
+  private RunnerParametersService myRunnerParametersService;
 
   @BeforeMethod
   public void setUp()
@@ -28,6 +30,7 @@ public class DotMemoryUnitPublisherTest {
     myAfterBuildPublisher = myCtx.mock(ResourcePublisher.class);
     myFileService = myCtx.mock(FileService.class);
     myLoggerService = myCtx.mock(LoggerService.class);
+    myRunnerParametersService = myCtx.mock(RunnerParametersService.class);
   }
 
   @Test
@@ -38,7 +41,12 @@ public class DotMemoryUnitPublisherTest {
     final File workspace2File = new File("workspace2");
     final DotMemoryUnitOutput output = new DotMemoryUnitOutput(Arrays.asList(workspace1File, workspace2File));
     final File outputFile = new File("output");
+    final File snapshotsDir = new File("snapshotsDir");
+
     myCtx.checking(new Expectations() {{
+      oneOf(myRunnerParametersService).tryGetRunnerParameter(Constants.SNAPSHOTS_PATH_VAR);
+      will(returnValue(snapshotsDir.getPath()));
+
       oneOf(myFileService).readAllTextFile(outputFile);
       will(Expectations.returnValue("output content"));
 
@@ -62,6 +70,6 @@ public class DotMemoryUnitPublisherTest {
   @NotNull
   private DotMemoryUnitPublisher createInstance()
   {
-    return new DotMemoryUnitPublisher(myOutputParser, myAfterBuildPublisher, myFileService, myLoggerService);
+    return new DotMemoryUnitPublisher(myOutputParser, myAfterBuildPublisher, myFileService, myLoggerService, myRunnerParametersService);
   }
 }

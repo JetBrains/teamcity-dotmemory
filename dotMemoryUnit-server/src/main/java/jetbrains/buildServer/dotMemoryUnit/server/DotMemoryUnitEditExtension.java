@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class DotMemoryUnitEditExtension extends RunTypeExtension implements PositionAware {
   private static final String DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path to dotMemoryUnit.exe must be specified.";
-  private static final String WORKSPACES_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path for storing workspaces must be specified.";
   private static final List<String> ourRunTypes = Arrays.asList("MSBuild", "NAnt", "NUnit", "jetbrains.mspec", "jetbrains.dotNetGenericRunner", "jetbrains.xunit", "VisualStudioTest", "MSTest", "VSTest");
   private final String myViewUrl;
   private final String myEditUrl;
@@ -58,10 +57,6 @@ public class DotMemoryUnitEditExtension extends RunTypeExtension implements Posi
         final boolean useDotMemoryUnit = StringUtil.isTrue(properties.get(DotMemoryUnitBean.Shared.getUseDotMemoryUnitKey()));
         if(useDotMemoryUnit && StringUtil.isEmptyOrSpaces(properties.get(DotMemoryUnitBean.Shared.getPathKey()))) {
           result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getPathKey(), DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE));
-        }
-
-        if(useDotMemoryUnit && StringUtil.isEmptyOrSpaces(properties.get(DotMemoryUnitBean.Shared.getWorkspacesPathKey()))) {
-          result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getWorkspacesPathKey(), WORKSPACES_PATH_NOT_SPECIFIED_ERROR_MESSAGE));
         }
 
         return result;

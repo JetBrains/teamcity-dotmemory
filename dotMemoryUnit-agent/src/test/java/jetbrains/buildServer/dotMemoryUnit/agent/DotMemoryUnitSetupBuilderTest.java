@@ -46,7 +46,7 @@ public class DotMemoryUnitSetupBuilderTest {
     final CommandLineSetup baseSetup = new CommandLineSetup("someTool", Arrays.asList(new CommandLineArgument("/arg1", CommandLineArgument.Type.PARAMETER), new CommandLineArgument("/arg2", CommandLineArgument.Type.PARAMETER)), Collections.singletonList(myCommandLineResource));
     final File projectFile = new File("aaa");
     final File outputFile = new File("output");
-    final File workspaceDir = new File("workspaceDir");
+    final File snapshotsDir = new File("snapshotsDir");
     final File dotMemoryUnitFile = new File("c:\\abc", DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_EXE_NAME);
     myCtx.checking(new Expectations() {{
       oneOf(myAssertions).contains(RunnerAssertions.Assertion.PROFILING_IS_NOT_ALLOWED);
@@ -58,8 +58,8 @@ public class DotMemoryUnitSetupBuilderTest {
       oneOf(myRunnerParametersService).getRunnerParameter(Constants.PATH_VAR);
       will(returnValue(dotMemoryUnitFile.getParent()));
 
-      oneOf(myRunnerParametersService).getRunnerParameter(Constants.WORKSPACES_PATH_VAR);
-      will(returnValue(workspaceDir.getPath()));
+      oneOf(myFileService).getTempDirectory();
+      will(returnValue(snapshotsDir));
 
       oneOf(myFileService).getTempFileName(DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_PROJECT_EXT);
       will(returnValue(projectFile));
@@ -67,7 +67,7 @@ public class DotMemoryUnitSetupBuilderTest {
       oneOf(myFileService).getTempFileName(DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_OUTPUT_EXT);
       will(returnValue(outputFile));
 
-      oneOf(myDotMemoryUnitProjectGenerator).create(new DotMemoryUnitContext(baseSetup, workspaceDir, outputFile));
+      oneOf(myDotMemoryUnitProjectGenerator).create(new DotMemoryUnitContext(baseSetup, snapshotsDir, outputFile));
       will(returnValue("project content"));
 
       oneOf(myFileService).validatePath(dotMemoryUnitFile);

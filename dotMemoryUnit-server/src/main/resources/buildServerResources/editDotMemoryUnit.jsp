@@ -48,13 +48,13 @@
   </tr>
 
   <tr id="dotMemoryUnitWorkspacesPathContainer" class="hidden">
-    <th><label for="${bean.workspacesPathKey}">Path for storing workspaces: <l:star/></label></th>
+    <th><label for="${bean.snapshotsPathKey}">Memory snapshots artifacts path: </label></th>
     <td>
       <div class="completionIconWrapper">
-        <props:textProperty name="${bean.workspacesPathKey}" className="longField"/>
+        <props:textProperty name="${bean.snapshotsPathKey}" className="longField"/>
       </div>
-      <span class="error" id="error_${bean.workspacesPathKey}"></span>
-      <span class="smallNote">Specify path to directory which will be used by the JetBrains dotMemory Unit for storing workspaces</span>
+      <span class="error" id="error_${bean.snapshotsPathKey}"></span>
+      <span class="smallNote">For failed tests JetBrains dotMemory Unit produces a set of memory snapshots. Please specify relative path in build artifacts where these snapshots should be uploaded.</span>
     </td>
   </tr>
 
