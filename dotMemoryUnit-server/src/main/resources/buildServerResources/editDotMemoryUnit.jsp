@@ -23,12 +23,17 @@
 
       BS.VisibilityHandlers.updateVisibility($('dotMemoryUnitPathContainer'));
       BS.VisibilityHandlers.updateVisibility($('dotMemoryUnitWorkspacesPathContainer'));
+    },
+
+    showHomePage: function() {
+      var winSize = BS.Util.windowSize();
+      BS.Util.popupWindow('http://www.jetbrains.com/dotmemory/unit/', 'JetBrains dotMemory Unit', { width: 0.9 * winSize[0], height: 0.9 * winSize[1] });
+      BS.stopPropagation(event);
     }
   }
 </script>
 
-
-<l:settingsGroup title="<a href='http://www.jetbrains.com/dotmemory/unit/' target='JetBrains dotMemory Unit'>JetBrains dotMemory Unit</a>">
+<l:settingsGroup title="JetBrains dotMemory Unit <i class='icon-external-link' title='Open in new window' onclick='BS.DotMemoryUnit.showHomePage()'/i>">
   <tr>
     <th><label for="${bean.useDotMemoryUnitKey}">Run build step under JetBrains dotMemory Unit:</label></th>
     <td><props:checkboxProperty name="${bean.useDotMemoryUnitKey}" onclick="BS.DotMemoryUnit.updatePathVisibility()"/>
