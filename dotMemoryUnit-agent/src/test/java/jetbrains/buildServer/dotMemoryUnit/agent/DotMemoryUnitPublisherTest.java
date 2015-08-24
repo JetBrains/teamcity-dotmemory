@@ -44,7 +44,7 @@ public class DotMemoryUnitPublisherTest {
     final File snapshotsDir = new File("snapshotsDir");
 
     myCtx.checking(new Expectations() {{
-      oneOf(myRunnerParametersService).tryGetRunnerParameter(Constants.SNAPSHOTS_PATH_VAR);
+      oneOf(myRunnerParametersService).getRunnerParameter(Constants.SNAPSHOTS_PATH_VAR);
       will(returnValue(snapshotsDir.getPath()));
 
       oneOf(myFileService).readAllTextFile(outputFile);

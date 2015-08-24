@@ -7,6 +7,7 @@ import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunTypeExtension;
+import jetbrains.buildServer.util.CollectionsUtil;
 import jetbrains.buildServer.util.StringUtil;
 import jetbrains.buildServer.util.positioning.PositionAware;
 import jetbrains.buildServer.util.positioning.PositionConstraint;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class DotMemoryUnitEditExtension extends RunTypeExtension implements PositionAware {
   private static final String DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path to dotMemoryUnit.exe must be specified.";
+  private static final String SNAPSHOTS_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The memory snapshots artifacts path must be specified.";
+  private static final String DEFAULT_SNAPSHOTS_PATH = "dotMemory";
   private static final List<String> ourRunTypes = Arrays.asList("MSBuild", "NAnt", "NUnit", "jetbrains.mspec", "jetbrains.dotNetGenericRunner", "jetbrains.xunit", "VisualStudioTest", "MSTest", "VSTest");
   private final String myViewUrl;
   private final String myEditUrl;
@@ -59,6 +62,10 @@ public class DotMemoryUnitEditExtension extends RunTypeExtension implements Posi
           result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getPathKey(), DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE));
         }
 
+        if(useDotMemoryUnit && StringUtil.isEmptyOrSpaces(properties.get(DotMemoryUnitBean.Shared.getSnapshotsPathKey()))) {
+          result.add(new InvalidProperty(DotMemoryUnitBean.Shared.getSnapshotsPathKey(), SNAPSHOTS_PATH_NOT_SPECIFIED_ERROR_MESSAGE));
+        }
+
         return result;
       }
     };
@@ -77,7 +84,7 @@ public class DotMemoryUnitEditExtension extends RunTypeExtension implements Posi
   @Nullable
   @Override
   public Map<String, String> getDefaultRunnerProperties() {
-    return new HashMap<String,String>();
+    return CollectionsUtil.asMap(DotMemoryUnitBean.Shared.getSnapshotsPathKey(), DEFAULT_SNAPSHOTS_PATH);
   }
 
   private String registerView(@NotNull final PluginDescriptor description,

@@ -1,17 +1,13 @@
 package jetbrains.buildServer.dotMemoryUnit.agent;
 
-import com.intellij.openapi.util.text.StringUtil;
 import java.io.File;
 import java.io.IOException;
 import jetbrains.buildServer.dotMemoryUnit.Constants;
 import jetbrains.buildServer.dotNet.buildRunner.agent.*;
-import jetbrains.buildServer.messages.serviceMessages.Message;
 import jetbrains.buildServer.messages.serviceMessages.PublishArtifacts;
 import org.jetbrains.annotations.NotNull;
 
 public class DotMemoryUnitPublisher implements ResourcePublisher {
-  static final String DEFAULT_SNAPSHOTS_DIRECTORY_NAME = "dotMemory";
-
   private final TextParser<DotMemoryUnitOutput> myOutputParser;
   private final FileService myFileService;
   private final LoggerService myLoggerService;
@@ -38,14 +34,7 @@ public class DotMemoryUnitPublisher implements ResourcePublisher {
   @Override
   public void publishAfterBuildArtifactFile(@NotNull final CommandLineExecutionContext executionContext, @NotNull final File file) {
     myAfterBuildPublisher.publishAfterBuildArtifactFile(executionContext, file);
-
-    final String snapshotsDirectoryName = myParametersService.tryGetRunnerParameter(Constants.SNAPSHOTS_PATH_VAR);
-    File snapshotsTargetDirectory;
-    if(!StringUtil.isEmptyOrSpaces(snapshotsDirectoryName)) {
-      snapshotsTargetDirectory = new File(snapshotsDirectoryName);
-    } else {
-      snapshotsTargetDirectory = new File(DEFAULT_SNAPSHOTS_DIRECTORY_NAME);
-    }
+    final File snapshotsTargetDirectory = new File(myParametersService.getRunnerParameter(Constants.SNAPSHOTS_PATH_VAR));
 
     try {
       final String outputText = myFileService.readAllTextFile(file);

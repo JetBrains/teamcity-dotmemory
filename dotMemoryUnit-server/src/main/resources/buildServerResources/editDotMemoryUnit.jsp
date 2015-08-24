@@ -48,7 +48,7 @@
   </tr>
 
   <tr id="dotMemoryUnitWorkspacesPathContainer" class="hidden">
-    <th><label for="${bean.snapshotsPathKey}">Memory snapshots artifacts path: </label></th>
+    <th><label for="${bean.snapshotsPathKey}">Memory snapshots artifacts path: <l:star/></label></th>
     <td>
       <div class="completionIconWrapper">
         <props:textProperty name="${bean.snapshotsPathKey}" className="longField"/>
