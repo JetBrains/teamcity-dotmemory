@@ -11,7 +11,7 @@ The proposed scenario has the following steps:
 - add a build step to build the project
 - add a build step to run memory tests and turn on "Run build step under JetBrains dotMemory Unit", use the "Path to dotMemoryUnit.exe" field to specify the path to the JetBrains dotMemory Unit profiler, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`, use the  "Path for storing workspaces" field to specify the path to the directory which will be used by the JetBrains dotMemory Unit to store workspaces.
 
-## Install ##
+## Installation ##
 
 To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:deploy/artifacts/content/dotMemoryUnit.zip) into the 'plugins' directory under the TeamCity Data Directory. Restart the server.
 
