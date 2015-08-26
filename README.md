@@ -1,33 +1,35 @@
 # JetBrains dotMemory Unit plugin for TeamCity #
 
-This plugin provides ability to run build step under the [JetBrains dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/) for the .Net related build runners in the TeamCity. The common scenario could has following steps:
-- create solution with test project
-- add [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/)
+This plugin provides the ability to run a build step under [JetBrains dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/) for the .Net related build runners in TeamCity. 
+
+The proposed scenario has the following steps:
+- create a solution with a test project
+- add the [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/)
 - implement tests using [JetBrains dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/)
-- create build project and configuration using the [TeamCity build server](https://www.jetbrains.com/teamcity/)
-- add build step to restore NuGet packages, for example `NuGet.exe restore testproj\packages.config -PackagesDirectory testproj\packages`
-- add build step to build project
-- add build step to run memory tests and turn on "Run build step under JetBrains dotMemory Unit", use field "Path to dotMemoryUnit.exe" to specify path to JetBrains dotMemory Unit profiler, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`, use field "Path for storing workspaces" to specify path to directory which will be used by the JetBrains dotMemory Unit for storing workspaces
+- create a build project and a configuration using the [TeamCity build server](https://www.jetbrains.com/teamcity/)
+- add a build step to restore NuGet packages, for example `NuGet.exe restore testproj\packages.config -PackagesDirectory testproj\packages`
+- add a build step to build the project
+- add a build step to run memory tests and turn on "Run build step under JetBrains dotMemory Unit", use the "Path to dotMemoryUnit.exe" field to specify the path to the JetBrains dotMemory Unit profiler, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`, use the  "Path for storing workspaces" field to specify the path to the directory which will be used by the JetBrains dotMemory Unit to store workspaces.
 
 ## Install ##
 
-To install the plugin, put [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:deploy/artifacts/content/dotMemoryUnit.zip) to 'plugins' direrctory under TeamCity data directory. Restart the server.
+To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:deploy/artifacts/content/dotMemoryUnit.zip) into the 'plugins' directory under the TeamCity Data Directory. Restart the server.
 
 <a name="agent_deployment"/>
-## The deployment of the JetBrains dotMemory Unit profiling command-line tool on the TeamCity agent ##
+##  Deployment of the JetBrains dotMemory Unit profiling command-line tool to a TeamCity agent ##
 
-JetBrains dotMemory Unit is a unit testing framework which allows you to write tests that check your code for all kinds of memory issues. To run memory tests using JetBrains dotMemory Unit testing framework on the TeamCity you should have JetBrains dotMemory Unit profiling command-line tool on the each TeamCity agent where you are going to run them. There are two alternative ways to deploy the command-line tool on the TeamCity agent:
+JetBrains dotMemory Unit is a unit testing framework allowing you to write tests that check your code for all kinds of memory issues. To run memory tests using JetBrains dotMemory Unit testing framework on TeamCity, you need to have the JetBrains dotMemory Unit profiling command-line tool on the each TeamCity agent where tests will be run. There are two ways to deploy the command-line tool on the TeamCity agent:
 
-- Add reference to the [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/) from your project. In this case you could specify relative path to dotMemoryUnit.exe, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`. You should add step to restore this package before the tests' run.
-- Download free stand-alone runner from the [JetBrains dotMemory Unit page](https://www.jetbrains.com/dotmemory/unit/).
+- Add a reference to the [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/) from your project. In this case you can specify a relative path to dotMemoryUnit.exe, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`. Add a step to restore this package before the tests' run.
+- Download a free stand-alone runner from the [JetBrains dotMemory Unit page](https://www.jetbrains.com/dotmemory/unit/).
 
 ## Implemention ##
 
-This project contains 3 modules: 'dotMemoryUnit-server', 'dotMemoryUnit-agent' and 'dotMemoryUnit-common'. They contain code for server and agent parts and a common part, available for both (agent and server). When implementing components for server and agent parts, do not forget to update spring context files under 'main/resources/META-INF'. See [TeamCity documentation](https://confluence.jetbrains.com/display/TCD9/Developing+Plugins+Using+Maven) for details on plugin development.
+The project contains 3 modules: 'dotMemoryUnit-server', 'dotMemoryUnit-agent' and 'dotMemoryUnit-common'. They contain the code for the server and agent parts, as well as a common part available to both (agent and server). When implementing components for the server and agent parts, make sure to update the spring context files under 'main/resources/META-INF'. See the [TeamCity documentation](https://confluence.jetbrains.com/display/TCD9/Developing+Plugins+Using+Maven) for details on plugin development.
 
 ## Build ##
 
-Use 'mvn package' command from the root project to build your plugin. Resulting package 'dotMemoryUnit.zip' will be placed in 'target' directory. The build is configured on the [JetBrains TeamCity build server](https://teamcity.jetbrains.com/viewLog.html?buildTypeId=TeamCityPluginsByJetBrains_DotMemoryUnit_Build&buildId=lastPinned&buildBranch=%3Cdefault%3E).
+Use the 'mvn package' command from the root project to build your plugin. The resulting package 'dotMemoryUnit.zip' will be placed in the 'target' directory. The build is configured on the [JetBrains TeamCity build server](https://teamcity.jetbrains.com/viewLog.html?buildTypeId=TeamCityPluginsByJetBrains_DotMemoryUnit_Build&buildId=lastPinned&buildBranch=%3Cdefault%3E).
 
 ## License ##
 
