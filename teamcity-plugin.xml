@@ -4,7 +4,7 @@
     <name>dotMemoryUnit</name>
     <display-name>JetBrains dotMemory Unit</display-name>
     <version>@Version@</version>
-    <description>Provides ability to run build step under the JetBrains dotMemory Unit for the .Net related build runners in the TeamCity.</description>
+    <description>Provides the ability to run a build step under JetBrains dotMemory Unit for the .Net related build runners in  TeamCity.</description>
     <download-url>https://github.com/JetBrains/teamcity-dotmemory</download-url>
     <email>Nikolay.Pianikov@jetbrains.com</email>
     <vendor>
