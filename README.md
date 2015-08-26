@@ -18,7 +18,7 @@ To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/http
 <a name="agent_deployment"/>
 ##  Deployment of the JetBrains dotMemory Unit profiling command-line tool to a TeamCity agent ##
 
-JetBrains dotMemory Unit is a unit testing framework allowing you to write tests that check your code for all kinds of memory issues. To run memory tests using JetBrains dotMemory Unit testing framework on TeamCity, you need to have the JetBrains dotMemory Unit profiling command-line tool on the each TeamCity agent where tests will be run. There are two ways to deploy the command-line tool on the TeamCity agent:
+JetBrains dotMemory Unit is a unit testing framework allowing you to write tests that check your code for all kinds of memory issues. To run memory tests using JetBrains dotMemory Unit testing framework on TeamCity, you need to have the JetBrains dotMemory Unit profiling command-line tool on the each TeamCity agent where tests will be run. There are two ways to deploy the command-line tool to the TeamCity agent:
 
 - Add a reference to the [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/) from your project. In this case you can specify a relative path to dotMemoryUnit.exe, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`. Add a step to restore this package before the tests' run.
 - Download a free stand-alone runner from the [JetBrains dotMemory Unit page](https://www.jetbrains.com/dotmemory/unit/).
