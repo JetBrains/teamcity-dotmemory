@@ -47,7 +47,7 @@ public class DotMemoryUnitSetupBuilderTest {
     final File projectFile = new File("aaa");
     final File outputFile = new File("output");
     final File snapshotsDir = new File("snapshotsDir");
-    final File dotMemoryUnitFile = new File("c:\\abc", DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_EXE_NAME);
+    final File dotMemoryUnitFile = new File(new File("abc").getAbsolutePath(), DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_EXE_NAME);
     myCtx.checking(new Expectations() {{
       oneOf(myAssertions).contains(RunnerAssertions.Assertion.PROFILING_IS_NOT_ALLOWED);
       will(returnValue(false));
