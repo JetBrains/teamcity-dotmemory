@@ -49,7 +49,11 @@ public class DotMemoryUnitSetupBuilder implements CommandLineSetupBuilder {
       return Collections.singleton(baseSetup);
     }
 
-    final File toolPath = new File(myParametersService.getRunnerParameter(Constants.PATH_VAR), DOT_MEMORY_UNIT_EXE_NAME);
+    File toolPath = new File(myParametersService.getRunnerParameter(Constants.PATH_VAR), DOT_MEMORY_UNIT_EXE_NAME);
+    if(!toolPath.isAbsolute()) {
+      toolPath = new File(myFileService.getCheckoutDirectory(), toolPath.getPath());
+    }
+
     myFileService.validatePath(toolPath);
 
     List<CommandLineResource> resources = new ArrayList<CommandLineResource>(baseSetup.getResources());

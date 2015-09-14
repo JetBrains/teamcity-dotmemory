@@ -142,6 +142,55 @@ public class DotMemoryUnitSetupBuilderTest {
     then(setup).isEqualTo(baseSetup);
   }
 
+  @Test
+  public void shouldUseAbsolutePathRelatedToCheckoutDirWhenUserDefinesRelativePath()
+  {
+    // Given
+    final CommandLineSetup baseSetup = new CommandLineSetup("someTool", Arrays.asList(new CommandLineArgument("/arg1", CommandLineArgument.Type.PARAMETER), new CommandLineArgument("/arg2", CommandLineArgument.Type.PARAMETER)), Collections.singletonList(myCommandLineResource));
+    final File projectFile = new File("aaa");
+    final File outputFile = new File("output");
+    final File snapshotsDir = new File("snapshotsDir");
+    final File dotMemoryUnitRelativePathFile = new File("abc", DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_EXE_NAME);
+    final File checkoutDirectory = new File("c:\\checkoutDirectory");
+    final File dotMemoryUnitAbsolutePathFile = new File(checkoutDirectory, dotMemoryUnitRelativePathFile.getPath());
+    myCtx.checking(new Expectations() {{
+      oneOf(myAssertions).contains(RunnerAssertions.Assertion.PROFILING_IS_NOT_ALLOWED);
+      will(returnValue(false));
+
+      oneOf(myRunnerParametersService).tryGetRunnerParameter(Constants.USE_VAR);
+      will(returnValue("True"));
+
+      oneOf(myRunnerParametersService).getRunnerParameter(Constants.PATH_VAR);
+      will(returnValue(dotMemoryUnitRelativePathFile.getParent()));
+
+      oneOf(myFileService).getTempDirectory();
+      will(returnValue(snapshotsDir));
+
+      oneOf(myFileService).getTempFileName(DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_PROJECT_EXT);
+      will(returnValue(projectFile));
+
+      oneOf(myFileService).getTempFileName(DotMemoryUnitSetupBuilder.DOT_MEMORY_UNIT_OUTPUT_EXT);
+      will(returnValue(outputFile));
+
+      oneOf(myDotMemoryUnitProjectGenerator).create(new DotMemoryUnitContext(baseSetup, snapshotsDir, outputFile));
+      will(returnValue("project content"));
+
+      oneOf(myFileService).getCheckoutDirectory();
+      will(returnValue(checkoutDirectory));
+
+      oneOf(myFileService).validatePath(dotMemoryUnitAbsolutePathFile);
+    }});
+
+    final DotMemoryUnitSetupBuilder instance = createInstance();
+
+    // When
+    final CommandLineSetup setup = instance.build(baseSetup).iterator().next();
+
+    // Then
+    myCtx.assertIsSatisfied();
+    then(setup.getToolPath()).isEqualTo(dotMemoryUnitAbsolutePathFile.getPath());
+  }
+
   @NotNull
   private DotMemoryUnitSetupBuilder createInstance()
   {
