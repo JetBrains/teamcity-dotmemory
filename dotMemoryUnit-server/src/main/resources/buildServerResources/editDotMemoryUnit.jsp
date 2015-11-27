@@ -21,8 +21,7 @@
         $j('#dotMemoryUnitWorkspacesPathContainer').addClass("hidden");
       }
 
-      BS.VisibilityHandlers.updateVisibility($('dotMemoryUnitPathContainer'));
-      BS.VisibilityHandlers.updateVisibility($('dotMemoryUnitWorkspacesPathContainer'));
+      BS.VisibilityHandlers.updateVisibility($('runnerParams'));
     },
 
     showHomePage: function() {
