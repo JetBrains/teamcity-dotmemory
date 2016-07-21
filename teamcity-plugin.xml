@@ -8,9 +8,8 @@
     <download-url>https://github.com/JetBrains/teamcity-dotmemory</download-url>
     <email>Nikolay.Pianikov@jetbrains.com</email>
     <vendor>
-      <name>JetBrains</name>
-      <url>https://www.jetbrains.com/</url>
-      <logo>https://www.jetbrains.com/company/docs/logo_jetbrains.png</logo>
+      <name>@VendorName@</name>
+      <url>@VendorURL@</url>
     </vendor>
   </info>
   <deployment use-separate-classloader="true" />
