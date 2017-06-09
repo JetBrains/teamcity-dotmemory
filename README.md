@@ -2,6 +2,8 @@
 
 This plugin provides the ability to run a build step under [JetBrains dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/) for the .Net related build runners in TeamCity. 
 
+[<img src="http://teamcity.jetbrains.com/app/rest/builds/buildType:(id:TeamCityPluginsByJetBrains_DotMemoryUnit_Build)/statusIcon.svg"/>](http://teamcity.jetbrains.com/viewType.html?buildTypeId=TeamCityPluginsByJetBrains_DotMemoryUnit_Build)
+
 The proposed scenario has the following steps:
 - create a solution with a test project
 - add the [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/)
@@ -13,7 +15,7 @@ The proposed scenario has the following steps:
 
 ## Installation ##
 
-To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:deploy/artifacts/content/dotMemoryUnit.zip) into the 'plugins' directory under the TeamCity Data Directory. Restart the server.
+To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/dotMemoryUnit.zip) into the 'plugins' directory under the TeamCity Data Directory. Restart the server.
 
 <a name="agent_deployment"/>
 ##  Deployment of the JetBrains dotMemory Unit profiling command-line tool to a TeamCity agent ##
