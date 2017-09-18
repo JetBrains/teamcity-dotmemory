@@ -1,4 +1,4 @@
-# JetBrains dotMemory Unit plugin for TeamCity #
+## [<img src="http://jb.gg/badges/official.svg" height="20" align="center"/>](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub) JetBrains dotMemory Unit plugin for [<img src="https://cdn.worldvectorlogo.com/logos/teamcity.svg" height="20" align="center"/>](https://www.jetbrains.com/teamcity/)
 
 This plugin provides the ability to run a build step under [JetBrains dotMemory Unit](https://www.jetbrains.com/dotmemory/unit/) for the .Net related build runners in TeamCity. 
 
