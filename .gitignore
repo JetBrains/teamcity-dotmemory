@@ -1,1 +1,5 @@
 dotMemoryUnit-common/
+build/
+dotMemoryUnit-agent/target/
+dotMemoryUnit-server/target/
+target/

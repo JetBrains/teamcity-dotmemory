@@ -21,7 +21,7 @@ public class DotMemoryUnitEditExtension extends RunTypeExtension implements Posi
   private static final String DOT_MEMORY_UNIT_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The path to dotMemoryUnit.exe must be specified.";
   private static final String SNAPSHOTS_PATH_NOT_SPECIFIED_ERROR_MESSAGE = "The memory snapshots artifacts path must be specified.";
   private static final String DEFAULT_SNAPSHOTS_PATH = "dotMemory";
-  private static final List<String> ourRunTypes = Arrays.asList("MSBuild", "NAnt", "NUnit", "jetbrains.mspec", "jetbrains.dotNetGenericRunner", "jetbrains.xunit", "VisualStudioTest", "MSTest", "VSTest");
+  private static final List<String> ourRunTypes = Arrays.asList("MSBuild", "NAnt", "NUnit", "jetbrains.mspec", "jetbrains.dotNetGenericRunner", "jetbrains.xunit", "VisualStudioTest", "MSTest", "VSTest", "dotnet.cli");
   private final String myViewUrl;
   private final String myEditUrl;
 
