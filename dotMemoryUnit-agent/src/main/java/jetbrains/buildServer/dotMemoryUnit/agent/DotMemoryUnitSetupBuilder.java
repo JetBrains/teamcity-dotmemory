@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DotMemoryUnitSetupBuilder implements CommandLineSetupBuilder {
   static final String DOT_MEMORY_UNIT_EXE_NAME = "dotMemoryUnit.exe";
-  static final String DOT_MEMORY_UNIT_PROJECT_EXT = ".dotMemoryUnit";
+  static final String DOT_MEMORY_UNIT_PROJECT_EXT = ".xml";
   static final String DOT_MEMORY_UNIT_OUTPUT_EXT = ".dotMemoryUnitResult";
 
   private final ResourceGenerator<DotMemoryUnitContext> myDotMemoryUnitProjectGenerator;
