@@ -15,7 +15,7 @@ The proposed scenario has the following steps:
 
 ## Installation ##
 
-To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/dotMemoryUnit.zip) into the 'plugins' directory under the TeamCity Data Directory. Restart the server.
+To install the plugin, put the [zip archive](https://teamcity.jetbrains.com/guestAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_DotMemoryUnit_Build,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/dotMemoryUnit.zip) into the 'plugins' directory under the TeamCity Data Directory. Restart the server.
 
 <a name="agent_deployment"/>
 ##  Deployment of the JetBrains dotMemory Unit profiling command-line tool to a TeamCity agent ##
@@ -25,10 +25,6 @@ JetBrains dotMemory Unit is a unit testing framework allowing you to write tests
 - Add a reference to the [NuGet package for the JetBrains dotMemory Unit](https://www.nuget.org/packages/JetBrains.DotMemoryUnit/) from your project. In this case you can specify a relative path to dotMemoryUnit.exe, for example `%system.teamcity.build.checkoutDir%\testproj\packages\JetBrains.dotMemoryUnit.2.0.20150814.155607-RC3\tools`. Add a step to restore this package before the tests' run.
 - Download a free stand-alone runner from the [JetBrains dotMemory Unit page](https://www.jetbrains.com/dotmemory/unit/).
 
-## Implemention ##
-
-The project contains 3 modules: 'dotMemoryUnit-server', 'dotMemoryUnit-agent' and 'dotMemoryUnit-common'. They contain the code for the server and agent parts, as well as a common part available to both (agent and server). When implementing components for the server and agent parts, make sure to update the spring context files under 'main/resources/META-INF'. See the [TeamCity documentation](https://confluence.jetbrains.com/display/TCD9/Developing+Plugins+Using+Maven) for details on plugin development.
-
 ## Build ##
 
 Use the 'mvn package' command from the root project to build your plugin. The resulting package 'dotMemoryUnit.zip' will be placed in the 'target' directory. The build is configured on the [JetBrains TeamCity build server](https://teamcity.jetbrains.com/viewLog.html?buildTypeId=TeamCityPluginsByJetBrains_DotMemoryUnit_Build&buildId=lastPinned&buildBranch=%3Cdefault%3E).
@@ -36,10 +32,6 @@ Use the 'mvn package' command from the root project to build your plugin. The re
 ## License ##
 
 JetBrains dotMemory Unit plugin for TeamCity is under the [Apache License](https://github.com/JetBrains/teamcity-dotmemory/blob/master/LICENSE).
-
-## Contributors ##
-
-- [Nikolay Pianikov](https://github.com/NikolayPianikov)
 
 ## Resources ##
 
