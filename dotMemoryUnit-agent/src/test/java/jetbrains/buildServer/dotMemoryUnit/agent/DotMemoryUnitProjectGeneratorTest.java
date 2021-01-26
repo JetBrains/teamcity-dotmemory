@@ -52,7 +52,7 @@ public class DotMemoryUnitProjectGeneratorTest {
   @Test
   public void shouldGenerateContent() {
     // Given
-    String expectedContent = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+    String expectedContent = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
                              "<dotMemoryUnit>" +
                              "<TargetExecutable>" + "wd" + File.separator + "tool" + "</TargetExecutable>\n" +
                              "<TargetArguments>arg1 arg2</TargetArguments>" +
