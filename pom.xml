@@ -22,7 +22,7 @@
   <version>1.0.8</version>
   <packaging>pom</packaging>
   <properties>
-      <teamcity-version>2020.1</teamcity-version>
+      <teamcity-version>2021.1</teamcity-version>
   </properties>
   <scm>
 	<connection>scm:git:https://github.com/JetBrains/teamcity-dotmemory.git</connection>    
