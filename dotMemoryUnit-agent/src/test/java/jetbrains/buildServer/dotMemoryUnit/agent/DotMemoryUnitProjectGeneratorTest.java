@@ -97,7 +97,7 @@ public class DotMemoryUnitProjectGeneratorTest {
 
     // Then
     myCtx.assertIsSatisfied();
-    then(content.trim().replace("\n", "").replace("\r", "")).isEqualTo(expectedContent.trim().replace("\n", "").replace("\r", ""));
+    then(content.trim().replace("\n", "").replace("\r", "").replace("  ", "")).isEqualTo(expectedContent.trim().replace("\n", "").replace("\r", ""));
   }
 
   @NotNull
